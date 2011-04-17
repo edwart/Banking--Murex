@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Configuration>
+    <Include>MurexEnv_all.xml</Include>
+    <Murex>
+	    <EnvType>UAT</EnvType>
+		<User>test</User>
+		<Directory>
+			<Application>/home/test</Application>
+		</Directory>
+		<Servers>
+			<Primary><Server>boxname</Server></Primary>
+			<Session><Server>boxname</Server></Primary>
+
+		</Servers>
+			
+
+</Configuration>
+	

@@ -1,22 +1,39 @@
 package Banking::Murex;
 
-use warnings;
-use strict;
-use Carp;
+use Moose;
 
-use version; $VERSION = qv('0.0.3');
+our $VERSION = '0.0.1';
 
-# Other recommended modules (uncomment to use):
-#  use IO::Prompt;
-#  use Perl6::Export;
-#  use Perl6::Slurp;
-#  use Perl6::Say;
+with 'MooseX::Object::Pluggable';
+with 'Banking::Murex::Config';
+#with 'Banking::Murex::Templates';
+#with 'Banking::Murex::Database';
+#with 'Banking::Murex::ProcessingScripts';
+#with 'Banking::Murex::Monitor';
+
+our %imports = (); # Anything supplied in the use statement goes in here e.g. use Schedule::Pluggable (something => value);
+
+# merge anything specied in %imports with any parameters passed on object creation
+sub BUILDARGS {
+   my $class = shift;
+
+   my %params = ( %imports, @_ );
+   return \%params;
+}
+sub BUILD {
+}
+# Populate %imports with whatever gets supplied on the use line
+sub import {
+    my $class = shift;
+    if (scalar(@_) % 2 == 0) {
+        %imports = @_;
+    }
+}
+
+no Moose;
 
 
-# Module implementation here
-
-
-1; # Magic true value required at end of module
+1; 
 __END__
 
 =head1 NAME
