@@ -65,3 +65,21 @@ no Moose;
 
 __PACKAGE__->meta->make_immutable; # Speed up class by preventing runtime changes to class;
 1;
+__END__
+
+=head1 NAME
+
+Banking::Murex
+
+=head1 SYNOPSIS
+
+use Murex;
+
+my $mx = Murex->new();
+
+=head1 DESCRIPTION
+
+=head1 OPTIONS
+
+
+=cut
