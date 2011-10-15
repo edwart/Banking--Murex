@@ -4,6 +4,11 @@ MANIFEST
 Makefile.PL
 README
 lib/Banking/Murex.pm
+lib/Banking/Murex/Config.pm
+lib/Banking/Murex/Switches.pm
+lib/Banking/Murex/Template.pm
+lib/Banking/Murex/XML.pm
+lib/Banking/Murex/Log.pm
 t/00.load.t
 t/perlcritic.t
 t/pod-coverage.t
