@@ -24,7 +24,7 @@ after BUILD => sub {
         $self->_create_logconfig($self->logconfig());
     }
     umask 0047;
-    Log::Log4perl::init($self->logconfig);
+    Log::Log4perl::init($self->logconfig) if -f $self->logconfig;
 };
 sub _get_logconfig {
     my $self = shift;

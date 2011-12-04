@@ -38,7 +38,7 @@ after BUILDARGS => sub {
         push(@opt_definitions, $attribute->name.'=s') if $attribute->has_writer or $attribute->has_write_method;
     }
 #    local @ARGV = @ARGV;
-    Trace::PARAMS(Data::Dumper->Dump([\%params, \@opt_definitions], [qw/%params @opt_definitions/]));
+    Trace::PARAMS(Data::Dumper->Dump([\@ARGV, \%params, \@opt_definitions], [qw/@ARGV %params @opt_definitions/]));
     GetOptions(\%opts, @opt_definitions );
     process_extra_commandline_options(\%opts);
     

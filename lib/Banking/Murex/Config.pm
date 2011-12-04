@@ -47,6 +47,12 @@ after BUILD => sub {
 
     return $self->config;
 };
+sub _get_mxenv {
+    my $self = shift;
+	return $self->mxenv if $self->has_mxenv;
+	return $ENV{MXENV} if $ENV{MXENV};
+	return 'unset';
+}
 sub flat_config {
     my $self = shift;
     my $config = $self->config;
@@ -65,10 +71,6 @@ sub apptree {
 }
 sub get_from_config {
     my ($self, $what) = @_;
-    return $self->get_from_edw($what);
-}
-sub get_from_edw {
-    my ($self, $what) = @_;
     my $cfg = $self->config();
     my $flatcfg = $self->flat_config();
     return $cfg->{$what} if exists $cfg->{$what};
@@ -84,29 +86,12 @@ sub get_from_edw {
     }
     return undef;
 }
-sub fileserver_host {
-    my $self = shift;
-    return $self->get_from_edw('Murex.Services.FileServer.Host');
-}
-sub fileserver_port {
-    my $self = shift;
-    my $cfg = $self->config;
-    return $self->get_from_edw('Murex.Services.FileServer.Port');
-}
-sub edwid {
-    my $self = shift;
-    return $self->get_from_edw('EDWId');
-}
-sub edw {
-    my $self = shift;
-    my $cfg = $self->config;
-    return $cfg;
-}
 sub __include_config {
     my ($self, $existing, $config) = @_;
     Trace::CONFIG(Data::Dumper->Dump([$existing, $config], [qw/$existing $config/]));
     my $path = $config =~ m!^/! ? $config
                                 : join('/', $self->configdir, $config);
+	return {} unless -f $path;
     my $new = XMLin($path);
     my $merged = merge( $existing, $new );
     Trace::CONFIG(Data::Dumper->Dump([$new, $merged], [qw/$new $merged/]));
