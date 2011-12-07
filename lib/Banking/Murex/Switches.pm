@@ -1,6 +1,7 @@
 package Banking::Murex::Switches;
 
 use Moose::Role;
+use MooseX::Getopt;
 use Trace;
 use Data::Dumper;
 use Hash::Flatten qw(:all);
